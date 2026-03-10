@@ -1,10 +1,22 @@
-import { createBrowserRouter } from "react-router-dom"
+//import { createBrowserRouter } from "react-router-dom"
 import Homepage from "../components/Homepage";
 import { ListPage } from "../components/ListPage";
 import { Layout } from "../components/Layout";
 
-export const router = createBrowserRouter([
- {
+import type { RouteObject } from "react-router";
+
+// export const router = createBrowserRouter([
+//  {
+//     path: "/",
+//     Component: Layout,
+//     children: [
+//       { index: true, Component: Homepage },
+//       { path: ":slug", Component: ListPage },
+//     ],
+//   },
+// ])
+export const routes: RouteObject[] = [
+  {
     path: "/",
     Component: Layout,
     children: [
@@ -12,4 +24,4 @@ export const router = createBrowserRouter([
       { path: ":slug", Component: ListPage },
     ],
   },
-])
+];
