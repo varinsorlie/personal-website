@@ -49,12 +49,12 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             {/* Avatar */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3">
+           <div className="mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xs sm:max-w-none">
                 {PROFILE_IMAGE.map((src, idx) => (
                   <div
                     key={idx}
-                    className="w-30 h-30 rounded-full overflow-hidden border-2 border-border flex-shrink-0"
+                    className="w-full aspect-square rounded-full overflow-hidden border-2 border-border"
                   >
                     <ImageWithFallback
                       src={src}
