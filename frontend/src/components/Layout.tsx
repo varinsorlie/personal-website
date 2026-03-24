@@ -1,0 +1,139 @@
+import { Outlet, useLocation } from "react-router-dom";
+import { motion } from "motion/react";
+import { createContext, useContext, useEffect, useState } from "react";
+import NavItem from "./NavItem.js";
+import cv from "../assets/cv_march26.pdf"
+
+type Locale = "en" | "no";
+
+const translations: Record<Locale, Record<string, string>> = {
+  en: {
+    greeting: "Vårin Sørlie",
+    subtitle: "Designer, developer, and professional over-thinker.",
+    intro:
+      "This site is part portfolio, part personal encyclopedia of opinions. Welcome!",
+    curatedLists: "Recently posted",
+    resume: "Resume",
+    github: "GitHub",
+    linkedin: "LinkedIn",
+    email: "Email",
+    footer: "Made with care & caffeine",
+  },
+  no: {
+    greeting: "Vårin Sørlie",
+    subtitle: "Designer, utvikler, og livsnyter.",
+    intro:
+      "Dette er litt som en portfølje, og litt som en samling av tilfeldige ting som interesserer meg. Velkommen!",
+    curatedLists: "Nylig postet",
+    resume: "CV",
+    github: "GitHub",
+    linkedin: "LinkedIn",
+    email: "E-post",
+    footer: "Laget med kjærlighet & koffein",
+  },
+};
+
+type LanguageContextValue = {
+  locale: Locale;
+  setLocale: (l: Locale) => void;
+  t: (key: string) => string;
+};
+
+const LanguageContext = createContext<LanguageContextValue>({
+  locale: "no",
+  setLocale: () => {},
+  t: (k) => k,
+});
+
+export function useLanguage() {
+  return useContext(LanguageContext);
+}
+
+export function Layout() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const [locale, setLocale] = useState<Locale>(() => {
+  const stored = typeof window !== "undefined" && localStorage.getItem("locale");
+    return (stored as Locale) || "en";
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("locale", locale);
+    } catch {}
+  }, [locale]);
+
+  const t = (key: string) => translations[locale]?.[key] ?? key;
+
+  return (
+   <LanguageContext.Provider value={{ locale, setLocale, t }}>
+    
+     {/* NAV */}
+      <div className="relative flex flex-col items-center mb-5">
+
+        {/* Navigation row */}
+        <div className="flex gap-6 whitespace-nowrap">
+          <NavItem to="/">Home</NavItem>
+
+          <a href={cv} target="_blank" className="flex flex-col items-center gap-2">
+            <div className="h-[2px] w-8 opacity-0" />
+            <div className="nav-pill">Resume</div>
+          </a>
+
+          <NavItem to="/blog">Blog</NavItem>
+        </div>
+
+        {/* Language button */}
+        <div className="sm:absolute sm:right-0 sm:top-2.5">
+          <div className="nav-pill">
+            <button
+              aria-label="Toggle language"
+              onClick={() => setLocale(locale === "en" ? "no" : "en")}
+              className="text-[0.85rem] font-medium rounded-full hover:bg-foreground/5 transition"
+            >
+              {locale === "en" ? "NO" : "EN"}
+            </button>
+          </div>
+        </div>
+      </div>
+            
+
+      {/* <main> */}
+        
+        {/* <div className="min-h-screen bg-background text-foreground" style={{ fontFamily: "'Inter', sans-serif" }}> */}
+        {/* {!isHome && (
+          // TOP-BAR
+          <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
+            <div className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
+              <Link
+                to="/"
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="text-[0.8rem] tracking-wide uppercase">Back home</span>
+              </Link>
+              <Link
+                to="/"
+                className="text-[0.8rem] tracking-widest uppercase text-muted-foreground"
+              >
+                Vårin
+              </Link>
+            </div>
+          </header>
+        )} */}
+        
+        
+        <motion.main
+          key={location.pathname}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className={!isHome ? "pt-16" : ""}
+        >
+          <Outlet />
+        </motion.main>
+       {/* </div> */}
+      {/* </main> */}
+    </LanguageContext.Provider>
+  );
+}
