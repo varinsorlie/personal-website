@@ -5,6 +5,7 @@ import { Layout } from "../components/Layout.js";
 import Blog from "../components/BlogPage.js";
 import type { RouteObject } from "react-router-dom";
 import CVPage from "../components/CvPage.js";
+import TravelPage from "../components/TravelPage.js";
 
 
 export const routes: RouteObject[] = [
@@ -15,7 +16,8 @@ export const routes: RouteObject[] = [
       { index: true, Component: Home },
       { path: ":slug", Component: ListPage },
       { path: "blog", Component: Blog },
-      { path: "cvPage", Component: CVPage}
+      { path: "cvPage", Component: CVPage},
+      { path: "travelPage", Component: TravelPage},
     ],
   },
 ];

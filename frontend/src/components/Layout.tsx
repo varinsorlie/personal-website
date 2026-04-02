@@ -82,6 +82,7 @@ export function Layout() {
           {/* </a> */}
 
           <NavItem to="/blog">Blog</NavItem>
+          <NavItem to="/travelPage">Travel</NavItem>
         </div>
 
         {/* Language button */}
