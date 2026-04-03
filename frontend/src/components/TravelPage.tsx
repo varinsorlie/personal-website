@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { getTravelTips } from "../data/api.js"
-
+import TravelDetailPage from "./TravelDetailPage.js"
 // ── Types ──────────────────────────────────────────────────────
 interface Destination {
   city: string
@@ -248,7 +248,8 @@ export default function TravelPage() {
   )
 
   return (
-    <div className="min-h-screen bg-[#f5f0e8] text-[#0d0d0d]">
+    <div className="min-h-screen text-[#0d0d0d]"
+    style={{ background: "var(--background)" }}>
       <div className="max-w-5xl mx-auto px-6 pt-28 pb-24">
 
         {/* HEADER */}
@@ -261,7 +262,7 @@ export default function TravelPage() {
             <em className="text-[#c94b1f]">Tips</em>
           </h1>
           <p className="text-base text-black/50 max-w-md leading-relaxed">
-            Steder jeg har vært, ting jeg lærte — samlet så du slipper å finne ut av det selv.
+            Steder jeg har vært og ting jeg har lært
           </p>
         </div>
 

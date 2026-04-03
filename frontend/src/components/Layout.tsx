@@ -78,7 +78,7 @@ export function Layout() {
           {/* <a href={cv} target="_blank" className="flex flex-col items-center gap-2">
             <div className="h-[2px] w-8 opacity-0" /> */}
             {/* <div className="nav-pill">Resume</div> */}
-            <NavItem to="/cvPage">CV</NavItem>
+            <NavItem to="/cvPage">Resume</NavItem>
           {/* </a> */}
 
           <NavItem to="/blog">Blog</NavItem>

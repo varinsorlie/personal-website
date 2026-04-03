@@ -13,6 +13,8 @@ import { BouncyAvatar } from "./BouncyAvatar.js";
 import { useEffect, useState } from "react";
 import { getLists } from "../data/api.js";
 
+import retro from "../assets/test.jpeg"; 
+
 export default function Home() {
   const PROFILE_IMAGE = [myImage1, myImage2, myImage3, myImage4]
 
@@ -79,8 +81,14 @@ export default function Home() {
 
   {/* RECENT POSTS */}
   <section 
-   className="sticky top-0 z-20 py-20"
-  style={{ background: "var(--background2)" }}
+  className="sticky top-0 z-20 py-20"
+        style={{ 
+          background: "var(--background2)",
+          backgroundImage: `url(${retro})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
 >
   <div className="max-w-5xl mx-auto px-6">
       {/* your recent posts */}
